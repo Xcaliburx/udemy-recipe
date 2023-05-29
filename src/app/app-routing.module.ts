@@ -1,3 +1,6 @@
+import { LoggedInGuard } from './auth/loggedIn.guard';
+import { AuthGuard } from './auth/auth.guard';
+import { AuthComponent } from './auth/auth.component';
 import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
@@ -16,6 +19,7 @@ const appRoutes: Routes = [
     {
         path: 'recipes',
         component: RecipesComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: '',
@@ -40,6 +44,11 @@ const appRoutes: Routes = [
     {
         path: 'shopping-list',
         component: ShoppingListComponent
+    },
+    {
+        path: 'auth',
+        component: AuthComponent,
+        canActivate: [LoggedInGuard]
     }
 ]
 
